@@ -12,14 +12,19 @@ import {
 } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { useAppDispatch } from "@/redux/hooks";
+import { addTodo } from "@/redux/features/todoSlice";
 
 const AddTodoModal = () => {
   const [task, setTask] = useState("");
   const [description, setDescription] = useState("");
-const handleSubmit = (e:FormEvent)=> {
-  e.preventDefault()
-  console.log(task,description);
-}
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const todoDetails = { title: task, description };
+    dispatch(addTodo(todoDetails));
+  };
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -59,8 +64,7 @@ const handleSubmit = (e:FormEvent)=> {
           </div>
           <DialogFooter>
             <DialogClose asChild>
-
-            <Button type="submit">Save changes</Button>
+              <Button type="submit">Save changes</Button>
             </DialogClose>
           </DialogFooter>
         </form>

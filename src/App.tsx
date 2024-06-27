@@ -1,15 +1,10 @@
-import TodoContainer from "./components/todo/TodoContainer";
-import Container from "./components/ui/Container";
+import Todo from "./pages/Todo";
 
 function App() {
   return (
-    <Container>
-      <h1 className="text-center text text-3xl font-semibold">
-        My Simple Todo
-      </h1>
-      <TodoContainer/>
-
-    </Container>
+    <>
+      <Todo />
+    </>
   );
 }
 
