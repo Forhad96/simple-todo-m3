@@ -11,7 +11,17 @@ export const baseApi = createApi({
             url:"/tasks",
             method:"GET"
         })
+    }),
+    addTodo: builder.mutation({
+        query:(payload) => {
+          console.log("task from api",payload);
+          return{
+            url:"/tasks",
+            method:"POST",
+            body:payload
+        }
+      }
     })
   })
 });
-export const {useGetTodosQuery} = baseApi
+export const {useGetTodosQuery,useAddTodoMutation} = baseApi
