@@ -32,7 +32,7 @@ const AddTodoModal = () => {
 
   // for api
   const [addTodo,response] = useAddTodoMutation()
-console.log(description);
+console.log(response);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
