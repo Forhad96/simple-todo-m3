@@ -5,6 +5,7 @@ type TTodo = {
   title: string;
   description: string;
   isCompleted?: boolean;
+  priority:string;
 };
 type TInitialState = {
   todos: TTodo[];
@@ -27,6 +28,7 @@ const todoSlice = createSlice({
       const todo = state.todos.find((item) => item.id === actions.payload);
       if (todo) {
         todo.isCompleted = !todo.isCompleted;
+        // state.todos.push(todo)
       }
     },
   },

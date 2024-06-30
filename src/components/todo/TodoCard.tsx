@@ -7,7 +7,13 @@ type TTodoProps = {
   description: string;
   isCompleted?: boolean;
 };
-const TodoCard = ({ id, title, description, isCompleted }: TTodoProps) => {
+const TodoCard = ({
+  id,
+  title,
+  description,
+  isCompleted,
+  priority,
+}: TTodoProps) => {
   const dispatch = useAppDispatch();
   const handleToggleState = () => {
     dispatch(toggleTodoState(id));
@@ -20,16 +26,24 @@ const TodoCard = ({ id, title, description, isCompleted }: TTodoProps) => {
         name="todoState"
         id="todoState"
       />
-      <p className="font-semibold">{title}</p>
+      <p className="font-semibold flex-1 ml-2">{title}</p>
       {/* <p>time</p> */}
-      <div>
+      <div className="flex items-center justify-start gap-2 flex-1">
+        <div
+          className={`size-3 rounded-full ${priority === "High" && "bg-red-500"} 
+          ${priority === "Medium" && "bg-yellow-500"}
+          ${priority === "Low" && "bg-green-500"}`}
+        ></div>
+        <p>{priority}</p>
+      </div>
+      <div className="flex-1">
         {isCompleted ? (
           <p className="text-green-500 font-semibold">Done</p>
         ) : (
           <p className="text-green-500  font-semibold">Pending</p>
         )}
       </div>
-      <p>{description}</p>
+      <p className="flex-1">{description}</p>
       <div className="space-x-4">
         <Button onClick={() => dispatch(removeTodo(id))} className="bg-red-500">
           <svg
