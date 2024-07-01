@@ -1,23 +1,39 @@
 import { useAppDispatch } from "@/redux/hooks";
 import { Button } from "../ui/button";
 import { removeTodo, toggleTodoState } from "@/redux/features/todoSlice";
+import { useUpdateTodoMutation } from "@/redux/api/api";
 type TTodoProps = {
+  _id: string;
   id: string;
   title: string;
   description: string;
   isCompleted?: boolean;
-  priority:string
+  priority: string;
 };
 const TodoCard = ({
+  _id,
   id,
   title,
   description,
   isCompleted,
   priority,
 }: TTodoProps) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
+  const [updateTodo, { isLoading }] = useUpdateTodoMutation();
+
   const handleToggleState = () => {
-    dispatch(toggleTodoState(id));
+    // dispatch(toggleTodoState(id));
+    const payload = {
+      id: _id,
+      data: {
+        id,
+        title,
+        description,
+        isCompleted: !isCompleted,
+        priority,
+      },
+    };
+    updateTodo(payload);
   };
   return (
     <div className="bg-white rounded-md flex justify-between items-center p-3 border">
@@ -26,12 +42,15 @@ const TodoCard = ({
         type="checkbox"
         name="todoState"
         id="todoState"
+        defaultChecked={isCompleted}
       />
       <p className="font-semibold flex-1 ml-2">{title}</p>
       {/* <p>time</p> */}
       <div className="flex items-center justify-start gap-2 flex-1">
         <div
-          className={`size-3 rounded-full ${priority === "High" && "bg-red-500"} 
+          className={`size-3 rounded-full ${
+            priority === "High" && "bg-red-500"
+          } 
           ${priority === "Medium" && "bg-yellow-500"}
           ${priority === "Low" && "bg-green-500"}`}
         ></div>

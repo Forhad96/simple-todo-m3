@@ -3,7 +3,11 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
-const TodoFilter = ({ priority, setPriority }) => {
+type TTodoFilterProps = {
+priority: string,
+setPriority:FunctionStringCallback
+}
+const TodoFilter = ({ priority, setPriority }:TTodoFilterProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
